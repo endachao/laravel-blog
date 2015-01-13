@@ -40,5 +40,6 @@ Route::group(['prefix'=>'backend','before'=>'auth.backend'],function(){
 
     Route::any('/','App\Controllers\Backend\MainController@index');
     Route::resource('main','App\Controllers\Backend\MainController');
+    Route::resource('cate','App\Controllers\Backend\CategoryController');
 
 });

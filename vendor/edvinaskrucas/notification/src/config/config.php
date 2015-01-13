@@ -64,7 +64,13 @@ return array(
     'default_formats'                       => array(
 
         'default'               => array(
-            'error'             => '<div class="alert alert-danger">:message</div>'
+//            'error'             => '<div class="alert alert-danger">:message</div>',
+            'success'             => '<div class="am-alert am-alert-success" data-am-alert>'.
+                                   '<button type="button" class="am-close">&times;</button>'.
+                                   '<p>:message</p></div>',
+            'error'             => '<div class="am-alert am-alert-danger" data-am-alert>'.
+                '<button type="button" class="am-close">&times;</button>'.
+                '<p>:message</p></div>',
         ),
 
     ),
