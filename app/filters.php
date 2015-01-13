@@ -88,3 +88,15 @@ Route::filter('csrf', function()
 		throw new Illuminate\Session\TokenMismatchException;
 	}
 });
+
+
+/**
+ * backend 权限检查
+ */
+Route::filter('auth.backend', function()
+{
+    if(!Sentry::check()){
+        return Redirect::route('backend.login');
+    }
+
+});

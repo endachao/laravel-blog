@@ -15,3 +15,30 @@ Route::get('/', function()
 {
 	return View::make('hello');
 });
+
+Route::get('backend/login',
+    array(
+        'as' => 'backend.login',
+        'uses' => 'App\Controllers\Backend\PublicController@index'
+    ));
+
+Route::post('backend/login',
+    array(
+        'as' => 'backend.login',
+        'uses' => 'App\Controllers\Backend\PublicController@login'
+    ));
+
+Route::get('backend/logout',
+    array(
+        'as' => 'backend.logout',
+        'uses' =>'App\Controllers\Backend\PublicController@logout'
+    ));
+
+
+
+Route::group(['prefix'=>'backend','before'=>'auth.backend'],function(){
+
+    Route::any('/','App\Controllers\Backend\MainController@index');
+    Route::resource('main','App\Controllers\Backend\MainController');
+
+});
