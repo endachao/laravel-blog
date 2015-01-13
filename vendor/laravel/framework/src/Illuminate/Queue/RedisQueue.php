@@ -27,6 +27,13 @@ class RedisQueue extends Queue implements QueueInterface {
 	protected $default;
 
 	/**
+	 * The expiration time of a job.
+	 *
+	 * @var int|null
+	 */
+	protected $expire = 60;
+
+	/**
 	 * Create a new Redis queue instance.
 	 *
 	 * @param  \Illuminate\Redis\Database  $redis
@@ -64,7 +71,7 @@ class RedisQueue extends Queue implements QueueInterface {
 	 */
 	public function pushRaw($payload, $queue = null, array $options = array())
 	{
-		$this->redis->rpush($this->getQueue($queue), $payload);
+		$this->getConnection()->rpush($this->getQueue($queue), $payload);
 
 		return array_get(json_decode($payload, true), 'id');
 	}
@@ -84,7 +91,7 @@ class RedisQueue extends Queue implements QueueInterface {
 
 		$delay = $this->getSeconds($delay);
 
-		$this->redis->zadd($this->getQueue($queue).':delayed', $this->getTime() + $delay, $payload);
+		$this->getConnection()->zadd($this->getQueue($queue).':delayed', $this->getTime() + $delay, $payload);
 
 		return array_get(json_decode($payload, true), 'id');
 	}
@@ -102,7 +109,7 @@ class RedisQueue extends Queue implements QueueInterface {
 	{
 		$payload = $this->setMeta($payload, 'attempts', $attempts);
 
-		$this->redis->zadd($this->getQueue($queue).':delayed', $this->getTime() + $delay, $payload);
+		$this->getConnection()->zadd($this->getQueue($queue).':delayed', $this->getTime() + $delay, $payload);
 	}
 
 	/**
@@ -115,13 +122,18 @@ class RedisQueue extends Queue implements QueueInterface {
 	{
 		$original = $queue ?: $this->default;
 
-		$this->migrateAllExpiredJobs($queue = $this->getQueue($queue));
+		$queue = $this->getQueue($queue);
 
-		$job = $this->redis->lpop($queue);
+		if ( ! is_null($this->expire))
+		{
+			$this->migrateAllExpiredJobs($queue);
+		}
+
+		$job = $this->getConnection()->lpop($queue);
 
 		if ( ! is_null($job))
 		{
-			$this->redis->zadd($queue.':reserved', $this->getTime() + 60, $job);
+			$this->getConnection()->zadd($queue.':reserved', $this->getTime() + $this->expire, $job);
 
 			return new RedisJob($this->container, $this, $job, $original);
 		}
@@ -136,7 +148,7 @@ class RedisQueue extends Queue implements QueueInterface {
 	 */
 	public function deleteReserved($queue, $job)
 	{
-		$this->redis->zrem($this->getQueue($queue).':reserved', $job);
+		$this->getConnection()->zrem($this->getQueue($queue).':reserved', $job);
 	}
 
 	/**
@@ -163,7 +175,7 @@ class RedisQueue extends Queue implements QueueInterface {
 	{
 		$options = ['cas' => true, 'watch' => $from, 'retry' => 10];
 
-		$this->redis->transaction($options, function ($transaction) use ($from, $to)
+		$this->getConnection()->transaction($options, function ($transaction) use ($from, $to)
 		{
 			// First we need to get all of jobs that have expired based on the current time
 			// so that we can push them onto the main queue. After we get them we simply
@@ -264,6 +276,16 @@ class RedisQueue extends Queue implements QueueInterface {
 	}
 
 	/**
+	 * Get the connection for the queue.
+	 *
+	 * @return \Predis\ClientInterface
+	 */
+	protected function getConnection()
+	{
+		return $this->redis->connection($this->connection);
+	}
+
+	/**
 	 * Get the underlying Redis instance.
 	 *
 	 * @return \Illuminate\Redis\Database
@@ -271,6 +293,27 @@ class RedisQueue extends Queue implements QueueInterface {
 	public function getRedis()
 	{
 		return $this->redis;
+	}
+
+	/**
+	 * Get the expiration time in seconds.
+	 *
+	 * @return int|null
+	 */
+	public function getExpire()
+	{
+		return $this->expire;
+	}
+
+	/**
+	 * Set the expiration time in seconds.
+	 *
+	 * @param  int|null  $seconds
+	 * @return void
+	 */
+	public function setExpire($seconds)
+	{
+		$this->expire = $seconds;
 	}
 
 }

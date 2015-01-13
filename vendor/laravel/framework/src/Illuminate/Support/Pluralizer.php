@@ -107,9 +107,11 @@ class Pluralizer {
 		'audio',
 		'bison',
 		'chassis',
+		'compensation',
 		'coreopsis',
 		'data',
 		'deer',
+		'education',
 		'equipment',
 		'fish',
 		'gold',
@@ -169,6 +171,8 @@ class Pluralizer {
 	public static function plural($value, $count = 2)
 	{
 		if ($count == 1) return $value;
+
+		if (in_array($value, static::$irregular)) return $value;
 
 		// First we'll check the cache of inflected values. We cache each word that
 		// is inflected so we don't have to spin through the regular expressions

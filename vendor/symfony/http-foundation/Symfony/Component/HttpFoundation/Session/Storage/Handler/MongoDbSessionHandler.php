@@ -12,7 +12,7 @@
 namespace Symfony\Component\HttpFoundation\Session\Storage\Handler;
 
 /**
- * MongoDB session handler
+ * MongoDB session handler.
  *
  * @author Markus Bachmann <markus.bachmann@bachi.biz>
  */
@@ -62,7 +62,7 @@ class MongoDbSessionHandler implements \SessionHandlerInterface
         $this->mongo = $mongo;
 
         $this->options = array_merge(array(
-            'id_field'   => '_id',
+            'id_field' => '_id',
             'data_field' => 'data',
             'time_field' => 'time',
         ), $options);
@@ -148,7 +148,7 @@ class MongoDbSessionHandler implements \SessionHandlerInterface
     }
 
     /**
-     * Return a "MongoCollection" instance
+     * Return a "MongoCollection" instance.
      *
      * @return \MongoCollection
      */

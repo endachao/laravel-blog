@@ -224,6 +224,9 @@ class TraceableEventDispatcher implements TraceableEventDispatcherInterface
     {
         $skipped = false;
         foreach ($this->dispatcher->getListeners($eventName) as $listener) {
+            if (!$listener instanceof WrappedListener) { // #12845: a new listener was added during dispatch.
+                continue;
+            }
             // Unwrap listener
             $this->dispatcher->removeListener($eventName, $listener);
             $this->dispatcher->addListener($eventName, $listener->getWrappedListener());
@@ -283,10 +286,10 @@ class TraceableEventDispatcher implements TraceableEventDispatcherInterface
                 $line = null;
             }
             $info += array(
-                'type'  => 'Function',
+                'type' => 'Function',
                 'function' => $listener,
-                'file'  => $file,
-                'line'  => $line,
+                'file' => $file,
+                'line' => $line,
                 'pretty' => $listener,
             );
         } elseif (is_array($listener) || (is_object($listener) && is_callable($listener))) {
@@ -303,11 +306,11 @@ class TraceableEventDispatcher implements TraceableEventDispatcherInterface
                 $line = null;
             }
             $info += array(
-                'type'  => 'Method',
+                'type' => 'Method',
                 'class' => $class,
                 'method' => $listener[1],
-                'file'  => $file,
-                'line'  => $line,
+                'file' => $file,
+                'line' => $line,
                 'pretty' => $class.'::'.$listener[1],
             );
         }

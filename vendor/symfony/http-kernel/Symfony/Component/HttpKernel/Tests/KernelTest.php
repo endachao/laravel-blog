@@ -194,11 +194,6 @@ class KernelTest extends \PHPUnit_Framework_TestCase
 
     public function testStripComments()
     {
-        if (!function_exists('token_get_all')) {
-            $this->markTestSkipped('The function token_get_all() is not available.');
-
-            return;
-        }
         $source = <<<'EOF'
 <?php
 
@@ -271,7 +266,7 @@ EOF;
 
         // Heredocs are preserved, making the output mixing Unix and Windows line
         // endings, switching to "\n" everywhere on Windows to avoid failure.
-        if (defined('PHP_WINDOWS_VERSION_MAJOR')) {
+        if ('\\' === DIRECTORY_SEPARATOR) {
             $expected = str_replace("\r\n", "\n", $expected);
             $output = str_replace("\r\n", "\n", $output);
         }
@@ -424,7 +419,7 @@ EOF;
 
         $this->assertEquals(array(
             __DIR__.'/Fixtures/Bundle2Bundle/foo.txt',
-            __DIR__.'/Fixtures/Bundle1Bundle/foo.txt',),
+            __DIR__.'/Fixtures/Bundle1Bundle/foo.txt', ),
             $kernel->locateResource('@Bundle1Bundle/foo.txt', null, false));
     }
 
@@ -487,7 +482,7 @@ EOF;
 
         $this->assertEquals(array(
             __DIR__.'/Fixtures/Resources/Bundle1Bundle/foo.txt',
-            __DIR__.'/Fixtures/Bundle1Bundle/Resources/foo.txt',),
+            __DIR__.'/Fixtures/Bundle1Bundle/Resources/foo.txt', ),
             $kernel->locateResource('@Bundle1Bundle/Resources/foo.txt', __DIR__.'/Fixtures/Resources', false)
         );
     }
