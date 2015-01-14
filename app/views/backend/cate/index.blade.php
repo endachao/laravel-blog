@@ -6,8 +6,9 @@
     {{ Notification::showAll() }}
 
     <div class="am-cf am-padding">
-        <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">表格</strong> /
-            <small>Table</small>
+        <div class="am-fl am-cf">
+            <strong class="am-text-primary am-text-lg">首页</strong> /
+            <small>分类</small>
         </div>
     </div>
 
@@ -21,9 +22,6 @@
                                 新增
                         </button>
 
-                    <button type="button" class="am-btn am-btn-default"><span class="am-icon-save"></span> 保存</button>
-                    <button type="button" class="am-btn am-btn-default"><span class="am-icon-archive"></span> 审核
-                    </button>
                     <button type="button" class="am-btn am-btn-default"><span class="am-icon-trash-o"></span> 删除
                     </button>
                 </div>
@@ -31,15 +29,8 @@
         </div>
         <div class="am-u-sm-12 am-u-md-3">
             <div class="am-form-group">
-                <select data-am-selected="{btnSize: 'sm'}">
-                    <option value="option1">所有类别</option>
-                    <option value="option2">IT业界</option>
-                    <option value="option3">数码产品</option>
-                    <option value="option3">笔记本电脑</option>
-                    <option value="option3">平板电脑</option>
-                    <option value="option3">只能手机</option>
-                    <option value="option3">超极本</option>
-                </select>
+
+                {{ Form::select('parent_id', Cate::getCateAll() ,null, ['data-am-selected' => '{btnSize: "sm"}']) }}
             </div>
         </div>
         <div class="am-u-sm-12 am-u-md-3">
@@ -54,7 +45,6 @@
 
     <div class="am-g">
         <div class="am-u-sm-12">
-            <form class="am-form">
                 <table class="am-table am-table-striped am-table-hover table-main">
                     <thead>
 
@@ -70,7 +60,7 @@
                     </thead>
                     <tbody>
 
-                    @foreach($cate as $k=>$v)
+                    @foreach($cate as $v)
 
                     <tr>
                         <td><input type="checkbox"/></td>
@@ -81,15 +71,21 @@
                         <td>
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
-                                    <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span
-                                            class="am-icon-pencil-square-o"></span> 编辑
-                                    </button>
-                                    <button class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
-                                            class="am-icon-copy"></span> 复制
-                                    </button>
-                                    <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span
-                                            class="am-icon-trash-o"></span> 删除
-                                    </button>
+
+                                    {{ Form::open(array('route' => array('backend.cate.edit', $v->id), 'method' => 'get')) }}
+                                        <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span
+                                                class="am-icon-pencil-square-o"></span> 编辑
+                                        </button>
+                                    {{ Form::close() }}
+
+                                    {{ Form::open(array('route' => array('backend.cate.destroy', $v->id), 'method' => 'delete')) }}
+
+                                        <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span
+                                                class="am-icon-trash-o"></span> 删除
+                                        </button>
+
+                                    {{ Form::close() }}
+
                                 </div>
                             </div>
                         </td>
@@ -99,21 +95,10 @@
                     </tbody>
                 </table>
                 <div class="am-cf">
-                    共 15 条记录
-                    <div class="am-fr">
-                        <ul class="am-pagination">
-                            <li class="am-disabled"><a href="#">«</a></li>
-                            <li class="am-active"><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
-                            <li><a href="#">»</a></li>
-                        </ul>
-                    </div>
+
+                    {{$cate->links('backend._layouts._page',['cate'=>$cate])}}
                 </div>
                 <hr/>
-            </form>
         </div>
 
     </div>

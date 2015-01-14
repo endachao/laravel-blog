@@ -1,37 +1,37 @@
 <?php
+/**
+ * 分类主控制器
+ * @author 袁超<yccphp@163.com>
+ */
 
 namespace App\Controllers\Backend;
 use Auth,BaseController,Form,Input,Redirect,Sentry,View,Validator,Notification;
 use Cate;
 class CategoryController extends BaseController {
 
-	/**
-	 * Display a listing of the resource.
-	 * GET /backend/category
-	 *
-	 * @return Response
-	 */
-	public function index()
+    /**
+     * 展示分类列表
+     * @return mixed
+     */
+    public function index()
 	{
 		//
-        return View::make('backend.cate.index')->withCate(Cate::all());
+        return View::make('backend.cate.index')->withCate(Cate::paginate(1));
 
 	}
 
-	/**
-	 * Show the form for creating a new resource.
-	 * GET /backend/category/create
-	 *
-	 * @return Response
-	 */
-	public function create()
+    /**
+     * 展示创建分类表单
+     * @return mixed
+     */
+    public function create()
 	{
 		//
         return View::make('backend.cate.create');
 	}
 
 	/**
-	 * Store a newly created resource in storage.
+	 * 处理添加分类
 	 * POST /backend/category
 	 *
 	 * @return Response
@@ -88,6 +88,7 @@ class CategoryController extends BaseController {
 	public function edit($id)
 	{
 		//
+        return View::make('backend.cate.edit')->withCate(Cate::find($id));
 	}
 
 	/**
@@ -100,10 +101,44 @@ class CategoryController extends BaseController {
 	public function update($id)
 	{
 		//
+        $cate = Cate::findOrFail($id);
+
+        $data = array(
+            'parent_id'=>Input::get('parent_id'),
+            'cate_name'=>Input::get('cate_name'),
+            'as_name'=>Input::get('as_name'),
+            'seo_title'=>Input::get('seo_title'),
+            'seo_key'=>Input::get('seo_key'),
+            'seo_desc'=>Input::get('seo_desc'),
+        );
+
+        $validator = Validator::make($data,Cate::$rules);
+
+        if($validator->passes()){
+
+            try{
+
+                foreach($data as $K=>$v){
+                    $cate->$K = $v;
+                }
+
+                if($cate->save()){
+                    Notification::success('修改成功');
+                    return Redirect::route('backend.cate.index');
+                }
+
+            }catch (\Exception $e){
+                return Redirect::back()->withErrors(array('error' => $e->getMessage()))->withInput();
+            }
+
+        }
+
+        Notification::error('修改失败');
+        return Redirect::back()->withErrors($validator)->withInput();
 	}
 
 	/**
-	 * Remove the specified resource from storage.
+	 * 处理分类删除
 	 * DELETE /backend/category/{id}
 	 *
 	 * @param  int  $id
@@ -112,6 +147,11 @@ class CategoryController extends BaseController {
 	public function destroy($id)
 	{
 		//
+        if(Cate::destroy($id)){
+            Notification::success('删除成功');
+            return Redirect::route('backend.cate.index');
+        }
+
 	}
 
 }
