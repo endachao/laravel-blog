@@ -3,7 +3,7 @@
 $presenter = new Illuminate\Pagination\BootstrapPresenter($paginator);
 ?>
 
-共 {{$paginator->getCurrentPage()}}  条记录
+共 {{$paginator->getTotal()}}  条记录
 
 
 <div class="am-fr">

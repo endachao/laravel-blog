@@ -16,7 +16,22 @@ class CategoryController extends BaseController {
     public function index()
 	{
 		//
-        return View::make('backend.cate.index')->withCate(Cate::paginate(1));
+        $search = [
+            'parent_id'=>Input::get('parent_id'),
+            'cate_name'=>Input::get('cate_name',null),
+        ];
+
+        if($search['cate_name'] != null && $search['parent_id'] != 0){
+            $cate = Cate::where('parent_id','=',$search['parent_id'])->where('cate_name','like',"%$search[cate_name]%")->paginate(15);
+        }elseif($search['cate_name'] != null && $search['parent_id'] == 0){
+            $cate = Cate::where('cate_name','like',"%$search[cate_name]%")->paginate(15);
+        }elseif($search['cate_name'] == null && $search['parent_id'] != 0){
+            $cate = Cate::where('parent_id','=',$search['parent_id'])->paginate(15);
+        }else{
+            $cate = Cate::paginate(15);
+        }
+
+        return View::make('backend.cate.index')->withCate($cate);
 
 	}
 

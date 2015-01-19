@@ -4,13 +4,13 @@ class Cate extends \Eloquent {
 
     protected $table = 'category';
 
-    static $catList = array(0=>'顶级分类');
+    static $catList = [0=>'顶级分类'];
 
-    static $rules = array(
+    static $rules = [
         'cate_name'=>'required',
         'as_name'=>'required',
         'parent_id'=>'Integer',
-    );
+    ];
 
     protected $fillable = [
         'cate_name',

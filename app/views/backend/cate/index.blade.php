@@ -27,6 +27,10 @@
                 </div>
             </div>
         </div>
+
+        {{ Form::open(['route' => 'backend.cate.index', 'method' => 'get']) }}
+
+
         <div class="am-u-sm-12 am-u-md-3">
             <div class="am-form-group">
 
@@ -35,12 +39,16 @@
         </div>
         <div class="am-u-sm-12 am-u-md-3">
             <div class="am-input-group am-input-group-sm">
-                <input type="text" class="am-form-field">
+                {{ Form::text('cate_name', '', ['class' => 'am-form-field']) }}
           <span class="am-input-group-btn">
-            <button class="am-btn am-btn-default" type="button">搜索</button>
+              {{ Form::submit('搜索', ['class' => 'am-btn am-btn-default']) }}
           </span>
             </div>
         </div>
+
+        {{ Form::close() }}
+
+
     </div>
 
     <div class="am-g">
