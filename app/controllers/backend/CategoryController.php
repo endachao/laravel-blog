@@ -118,11 +118,9 @@ class CategoryController extends BaseController {
 
             try{
 
-                foreach($data as $K=>$v){
-                    $cate->$K = $v;
-                }
+                $affectedRows = Cate::where('id', '=', $id)->update($data);
 
-                if($cate->save()){
+                if($affectedRows){
                     Notification::success('修改成功');
                     return Redirect::route('backend.cate.index');
                 }

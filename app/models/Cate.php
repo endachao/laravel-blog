@@ -1,7 +1,6 @@
 <?php
 
 class Cate extends \Eloquent {
-	protected $fillable = [];
 
     protected $table = 'category';
 
@@ -12,6 +11,15 @@ class Cate extends \Eloquent {
         'as_name'=>'required',
         'parent_id'=>'Integer',
     );
+
+    protected $fillable = [
+        'cate_name',
+        'as_name',
+        'parent_id',
+        'seo_title',
+        'seo_key',
+        'seo_desc',
+    ];
 
 
     /**

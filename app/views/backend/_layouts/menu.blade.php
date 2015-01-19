@@ -8,7 +8,7 @@
                 </a>
 
                 <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-nav">
-                    <li><a href="admin-user.html" class="am-cf">
+                    <li><a href="{{URL::route('backend.cate.index')}}" class="am-cf">
                             <span class="am-icon-check"></span>
                             文章分类
                             <span class="am-icon-star am-fr am-margin-right admin-icon-yellow"></span>
