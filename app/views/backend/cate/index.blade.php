@@ -61,6 +61,7 @@
                         <th class="table-id">ID</th>
                         <th class="table-title">分类名称</th>
                         <th class="table-type">别名</th>
+                        <th class="table-type">上级分类名称</th>
                         <th class="table-date">创建时间</th>
                         <th class="table-set">操作</th>
                     </tr>
@@ -68,13 +69,14 @@
                     </thead>
                     <tbody>
 
-                    @foreach($cate as $v)
+                    @foreach($cate as $k=> $v)
 
                     <tr>
                         <td><input type="checkbox"/></td>
                         <td>{{ $v->id}}</td>
                         <td><a href="#">{{ $v->cate_name}} </a></td>
                         <td>{{ $v->as_name}}</td>
+                        <td>{{  Cate::getCateNameById($v->parent_id) }}</td>
                         <td>{{ $v->created_at}}</td>
                         <td>
                             <div class="am-btn-toolbar">
@@ -104,7 +106,7 @@
                 </table>
                 <div class="am-cf">
 
-                    {{$cate->links('backend._layouts._page',['cate'=>$cate])}}
+                    {{$cate->links('backend._layouts._page')}}
                 </div>
                 <hr/>
         </div>

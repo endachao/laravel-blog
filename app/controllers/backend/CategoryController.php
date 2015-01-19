@@ -28,7 +28,7 @@ class CategoryController extends BaseController {
         }elseif($search['cate_name'] == null && $search['parent_id'] != 0){
             $cate = Cate::where('parent_id','=',$search['parent_id'])->paginate(15);
         }else{
-            $cate = Cate::paginate(15);
+            $cate = Cate::orderBy('parent_id','asc')->paginate(15);
         }
 
         return View::make('backend.cate.index')->withCate($cate);
