@@ -13,7 +13,7 @@ Blog system development based on laravel 4.2
 
 分类：100%
 用户：10%
-
+标签：100%
 
 喜欢这个项目，喜欢 laravel 欢迎加入 QQ 群与我们讨论：365969825
 

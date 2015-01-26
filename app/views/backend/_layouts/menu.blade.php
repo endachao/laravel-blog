@@ -16,9 +16,9 @@
                     </li>
 
                     <li>
-                        <a href="admin-help.html">
+                        <a href="{{URL::route('backend.tag.index')}}">
                             <span class="am-icon-puzzle-piece"></span>
-                            帮助页
+                            标签管理
                         </a>
                     </li>
 
