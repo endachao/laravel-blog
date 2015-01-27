@@ -1,7 +1,7 @@
 <?php
 namespace App\Controllers\Backend;
 use Auth,BaseController,Form,Input,Redirect,Sentry,View,Validator,Notification;
-use User;
+use User,UserGroup;
 class UserController extends BaseController {
 
 	/**
@@ -13,6 +13,7 @@ class UserController extends BaseController {
 	public function index()
 	{
 		//
+        return View::make('backend.user.index')->withUser(User::orderBy('id', 'desc')->paginate(15));
 	}
 
 	/**

@@ -51,6 +51,11 @@
                             用户组管理
                         </a>
                     </li>
+                    <li><a href="{{URL::route('backend.user.index')}}" class="am-cf">
+                            <span class="am-icon-child"></span>
+                            用户管理
+                        </a>
+                    </li>
                 </ul>
             </li>
 
