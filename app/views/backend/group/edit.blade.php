@@ -6,7 +6,7 @@
 <!-- content start -->
 
 
-{{ Form::model($tag, ['route' => ['backend.tag.update', $tag->id], 'method' => 'put','class'=>'am-form']) }}
+{{ Form::model($group, ['route' => ['backend.group.update', $group->id], 'method' => 'put','class'=>'am-form']) }}
 
 <div class="admin-content">
     {{ Notification::showAll() }}
@@ -34,11 +34,11 @@
 
                 <div class="am-g am-margin-top">
                     <div class="am-u-sm-4 am-u-md-2 am-text-right">
-                       标签名
+                        分组名称
                     </div>
 
                     <div class="am-u-sm-8 am-u-md-2">
-                        {{ Form::text('name', $tag->name, ['class' => 'am-input-sm']) }}
+                        {{ Form::text('name', $group->name, ['class' => 'am-input-sm']) }}
                     </div>
                     <div class="am-hide-sm-only am-u-md-8">
                         *必填，不可重复

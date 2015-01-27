@@ -6,7 +6,7 @@
 <!-- content start -->
 
 
-{{ Form::model($tag, ['route' => ['backend.tag.update', $tag->id], 'method' => 'put','class'=>'am-form']) }}
+{{ Form::open(['route' => 'backend.group.store', 'method' => 'post','class'=>'am-form']) }}
 
 <div class="admin-content">
     {{ Notification::showAll() }}
@@ -19,7 +19,7 @@
     @endif
 
     <div class="am-cf am-padding">
-        <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">标签</strong> / <small>修改标签</small></div>
+        <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">表单</strong> / <small>form</small></div>
     </div>
 
 
@@ -32,13 +32,14 @@
             <div class="am-tab-panel am-fade am-in am-active" id="tab1">
 
 
+
                 <div class="am-g am-margin-top">
                     <div class="am-u-sm-4 am-u-md-2 am-text-right">
-                       标签名
+                        分类名称
                     </div>
 
                     <div class="am-u-sm-8 am-u-md-2">
-                        {{ Form::text('name', $tag->name, ['class' => 'am-input-sm']) }}
+                        {{ Form::text('name', '', ['class' => 'am-input-sm']) }}
                     </div>
                     <div class="am-hide-sm-only am-u-md-8">
                         *必填，不可重复
@@ -48,9 +49,7 @@
 
             </div>
 
-        </div>
     </div>
-
 
     <div class="am-margin">
         {{ Form::submit('提交保存',['class'=>'am-btn am-btn-primary am-btn-xs']) }}

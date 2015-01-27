@@ -43,5 +43,6 @@ Route::group(['prefix'=>'backend','before'=>'auth.backend'],function(){
     Route::resource('cate','App\Controllers\Backend\CategoryController');
     Route::resource('tag','App\Controllers\Backend\TagController');
     Route::resource('article','App\Controllers\Backend\ArticleController');
+    Route::resource('group','App\Controllers\Backend\UserGroupController');
 
 });
