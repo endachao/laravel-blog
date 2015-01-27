@@ -23,4 +23,27 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	 */
 	protected $hidden = array('password', 'remember_token');
 
+    // 静态保存登陆信息
+    static $user;
+
+
+    public static function getLoginUserName(){
+
+        if(!isset(self::$user->first_name) && !isset(self::$user->first_name)){
+
+            self::$user = Sentry::getUser();
+
+        }
+
+        return self::$user->first_name.self::$user->last_name;
+    }
+
+    public static function getLoginUserId(){
+        if(!isset(self::$user->id)){
+
+            self::$user = Sentry::getUser();
+        }
+
+        return self::$user->id;
+    }
 }

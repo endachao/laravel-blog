@@ -12,8 +12,14 @@ Blog system development based on laravel 4.2
 后台登录：100%
 
 分类：100%
+
 用户：10%
+
 标签：100%
+
+文章：100%
+
+评论：8%
 
 喜欢这个项目，喜欢 laravel 欢迎加入 QQ 群与我们讨论：365969825
 

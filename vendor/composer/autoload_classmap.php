@@ -7,7 +7,9 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'AddAsnameToCategoryTable' => $baseDir . '/app/database/migrations/2015_01_13_091851_add_asname_to_category_table.php',
+    'AddTimeToArticleTable' => $baseDir . '/app/database/migrations/2015_01_26_054348_add_time_to_article_table.php',
     'AddUniqueToCategoryTable' => $baseDir . '/app/database/migrations/2015_01_13_091258_add_unique_to_category_table.php',
+    'App\\Controllers\\Backend\\ArticleController' => $baseDir . '/app/controllers/backend/ArticleController.php',
     'App\\Controllers\\Backend\\CategoryController' => $baseDir . '/app/controllers/backend/CategoryController.php',
     'App\\Controllers\\Backend\\MainController' => $baseDir . '/app/controllers/backend/MainController.php',
     'App\\Controllers\\Backend\\PublicController' => $baseDir . '/app/controllers/backend/PublicController.php',
