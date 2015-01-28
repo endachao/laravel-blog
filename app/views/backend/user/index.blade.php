@@ -67,13 +67,13 @@
                         <div class="am-btn-toolbar">
                             <div class="am-btn-group am-btn-group-xs">
 
-                                {{ Form::open(array('route' => array('backend.group.edit', $v->id), 'method' => 'get')) }}
+                                {{ Form::open(array('route' => array('backend.user.edit', $v->id), 'method' => 'get')) }}
                                 <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span
                                         class="am-icon-pencil-square-o"></span> 编辑
                                 </button>
                                 {{ Form::close() }}
 
-                                {{ Form::open(array('route' => array('backend.group.destroy', $v->id), 'method' => 'delete')) }}
+                                {{ Form::open(array('route' => array('backend.user.destroy', $v->id), 'method' => 'delete')) }}
 
                                 <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span
                                         class="am-icon-trash-o"></span> 删除
