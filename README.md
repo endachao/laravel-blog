@@ -19,7 +19,9 @@ Blog system development based on laravel 4.2
 
 用户组：80% （未做权限分配）
 
-用户：20% （完成用户列表展示）
+用户：80% （未做权限分配）
+
+网站设置：10%
 
 评论：8%
 
