@@ -72,6 +72,12 @@
                         </a>
                     </li>
 
+                    <li><a href="{{URL::route('backend.options.getNavIndex')}}" class="am-cf">
+                            <span class="am-icon-pencil-square-o"></span>
+                            导航管理
+                        </a>
+                    </li>
+
                 </ul>
             </li>
 

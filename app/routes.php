@@ -51,6 +51,12 @@ Route::group(['prefix'=>'backend','before'=>'auth.backend'],function(){
         [
             'getSite'=>'backend.options.site',
             'postSite'=>'backend.options.postSite',
+            'getNavIndex'=>'backend.options.getNavIndex',
+            'getNavCreate'=>'backend.options.getNavCreate',
+            'postNavCreate'=>'backend.options.postNavCreate',
+            'getNavEdit'=>'backend.options.getNavEdit',
+            'putNavEdit'=>'backend.options.putNavEdit',
+            'deleteNavDestroy'=>'backend.options.deleteNavDestroy',
         ]
     );
 
