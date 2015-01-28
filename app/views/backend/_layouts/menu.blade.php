@@ -59,6 +59,22 @@
                 </ul>
             </li>
 
+            <li class="admin-parent">
+                <a class="am-cf am-collapsed" data-am-collapse="{target: '#config-nav'}">
+                    <span class="am-icon-file"></span> 系统设置 <span class="am-icon-angle-right am-fr am-margin-right"></span>
+                </a>
+
+                <ul class="am-list am-collapse admin-sidebar-sub am-in" id="config-nav">
+
+                    <li><a href="{{URL::route('backend.options.site')}}" class="am-cf">
+                            <span class="am-icon-pencil-square-o"></span>
+                            系统参数
+                        </a>
+                    </li>
+
+                </ul>
+            </li>
+
             <li><a href="admin-table.html"><span class="am-icon-table"></span> 表格</a></li>
             <li><a href="admin-form.html"><span class="am-icon-pencil-square-o"></span> 表单</a></li>
             <li><a href="#"><span class="am-icon-sign-out"></span> 注销</a></li>
