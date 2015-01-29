@@ -42,7 +42,10 @@ Blog system development based on laravel 4.2
 
 1. 开启重写模块:使用`apache`请开启`mod_rewrite`,使用`nginx`同学请参考这个配置示例：[https://gist.github.com/davzie/3938080](https://gist.github.com/davzie/3938080)
 
-1. 那么现在访问`http://yourhost/public/backend` 应该会跳转到后台登录页。
+1. 把你的域名绑定到 `laravel-blog/public` 下
+
+1. 那么现在访问`http://yourhost/backend` 应该会跳转到后台登录页。
+
 
 ###开发进度
 ---
