@@ -66,4 +66,6 @@ Blog system development based on laravel 4.2
 9. 评论：8%
 10. 单页管理：5%
 
-喜欢这个项目，喜欢 laravel 欢迎加入 QQ 群与我们讨论：365969825####感谢支持！
+喜欢这个项目，喜欢 laravel 欢迎加入 QQ 群与我们讨论：365969825
+
+####感谢支持！
