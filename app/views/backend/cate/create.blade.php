@@ -53,12 +53,14 @@
                         分类名称
                     </div>
 
-                    <div class="am-u-sm-8 am-u-md-2">
+                    <div class="am-u-sm-8 am-u-md-4">
                         {{ Form::text('cate_name', '', ['class' => 'am-input-sm']) }}
                     </div>
-                    <div class="am-hide-sm-only am-u-md-8">
+                    <div class="am-hide-sm-only am-u-md-6">
+                        <small>
                         *必填，不可重复
                         <font color="red">{{ $errors->first('cate_name'); }}</font>
+                        </small>
                     </div>
                 </div>
 
@@ -67,12 +69,14 @@
                     <div class="am-u-sm-4 am-u-md-2 am-text-right">
                         别名
                     </div>
-                    <div class="am-u-sm-8 am-u-md-2">
+                    <div class="am-u-sm-8 am-u-md-4">
                         {{ Form::text('as_name','',['class'=>'am-input-sm']) }}
                     </div>
-                    <div class="am-hide-sm-only am-u-md-8">
+                    <div class="am-hide-sm-only am-u-md-6">
+                        <small>
                         *必填，不可重复
                         <font color="red">{{ $errors->first('as_name'); }}</font>
+                        </small>
                     </div>
                 </div>
 
