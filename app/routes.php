@@ -46,6 +46,7 @@ Route::group(['prefix'=>'backend','before'=>'auth.backend'],function(){
     Route::resource('group','App\Controllers\Backend\UserGroupController');
     Route::resource('user','App\Controllers\Backend\UserController');
     Route::resource('pages','App\Controllers\Backend\PagesController');
+    Route::resource('comment','App\Controllers\Backend\CommentController');
     Route::controller(
         'options',
         'App\Controllers\Backend\OptionsController',

@@ -34,6 +34,12 @@
                         </a>
                     </li>
 
+                    <li><a href="{{URL::route('backend.comment.index')}}">
+                            <span class="am-icon-clipboard"></span>
+                            评论管理
+                        </a>
+                    </li>
+
 
 <!--                    <li><a href="admin-gallery.html">-->
 <!--                            <span class="am-icon-th"></span>-->
