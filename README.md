@@ -2,6 +2,11 @@
 
 Blog system development based on laravel 4.2
 
+
+## 公告
+
+在开发的过程中，laravel 5 出来了，所以本系统暂停更新，转至 laravel 5 重新开发，目前后台基本开发完成，大家请转这 [yccphp/laravel-5-blog](https://github.com/yccphp/laravel-5-blog)
+
 ###Usage
 ---
 1. clone laravel-blog 到你的服务器环境
